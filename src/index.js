@@ -4,11 +4,16 @@ async function getWeather(city) {
       city,
     { mode: "cors" }
   );
-  const dataJSON = await data.json();
-  return dataJSON;
+
+  if(data.status !== 200){
+    throw new Error("Failed to get data");
+  } else {
+    const dataJSON = await data.json();
+    return dataJSON;
+  }
 }
 
-getWeather("maribor").then((data) => console.log(extractData(data)));
+getWeather("aksashdgiah").then(data => console.log(extractData(data))).catch(error => console.log(error.message));
 
 function extractData(json){
     const temp = json.current.temp_c;
