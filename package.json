@@ -1,0 +1,30 @@
+{
+  "name": "odin-weather-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --progress --mode=production",
+    "watch": "webpack --progress --watch",
+    "deploy-pages": "git add dist && git commit -m 'Dist subtree commit' && git subtree push --prefix dist origin gh-pages"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RaveTapp/OdinWeatherApp.git"
+  },
+  "author": "RaveTapp",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RaveTapp/OdinWeatherApp/issues"
+  },
+  "homepage": "https://github.com/RaveTapp/OdinWeatherApp#readme",
+  "devDependencies": {
+    "css-loader": "^7.1.2",
+    "globals": "^15.7.0",
+    "html-webpack-plugin": "^5.6.0",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.92.1",
+    "webpack-cli": "^5.1.4"
+  }
+}
