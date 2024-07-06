@@ -1,3 +1,5 @@
+import "./styles.css"
+
 async function getWeather(city) {
   try {
     const data = await fetch(
@@ -16,19 +18,20 @@ async function getWeather(city) {
   }
 }
 
-
-
 function extractData(json) {
   const temp = json.current.temp_c;
+  const weatherText = json.current.condition.text;
   const city = json.location.name;
   const country = json.location.country;
   //console.log(json);
 
-  return { temp, city, country };
+  return { temp, weatherText, city, country };
 }
 
 const inputForm = document.querySelector(".input form");
-const inputSubmit = document.querySelector(".input form [type='submit']");
+const input = inputForm.querySelector("#city");
+
+/*const inputSubmit = document.querySelector(".input form [type='submit']");
 inputSubmit.addEventListener("click", (event) => {
   event.preventDefault();
 
@@ -39,4 +42,22 @@ inputSubmit.addEventListener("click", (event) => {
     }
     
   });
+});*/
+
+function formSubmit() {
+  if(input.value != ""){//Če je krajše kot 3 črke je error
+    getWeather(input.value).then((data) => {
+      if(data){
+        console.log(extractData(data));
+      }
+    });
+  }
+}
+
+
+input.addEventListener("blur", formSubmit);
+
+inputForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  formSubmit();
 });

@@ -1,0 +1,14 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input label {
+    font-size: 1.5rem;
+}
+
+.input input{
+    height: 100%;
+    border: 1.5px black solid;
+}
