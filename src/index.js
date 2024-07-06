@@ -33,8 +33,10 @@ function extractData(json) {
 }
 
 function formSubmit() {
-  if (input.value != "") {
-    //Če je krajše kot 3 črke je error
+  if (input.value.length < 3) {
+    errorElem.textContent = "At least 3 characters are needed to search.";
+  } else {
+    errorElem.textContent = "";
     getWeather(input.value).then((data) => {
       if (data) {
         const weatherData = extractData(data);
