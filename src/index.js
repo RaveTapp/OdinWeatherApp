@@ -1,4 +1,9 @@
-import "./styles.css"
+import "./styles.css";
+
+const errorElem = document.querySelector(".main .error");
+const dataElem = document.querySelector(".main .data");
+const inputForm = document.querySelector(".input form");
+const input = inputForm.querySelector("#city");
 
 async function getWeather(city) {
   try {
@@ -14,7 +19,7 @@ async function getWeather(city) {
     const dataJSON = await data.json();
     return dataJSON;
   } catch (error) {
-    console.log(error.message);
+    errorElem.textContent = error.message;
   }
 }
 
@@ -23,37 +28,21 @@ function extractData(json) {
   const weatherText = json.current.condition.text;
   const city = json.location.name;
   const country = json.location.country;
-  //console.log(json);
 
   return { temp, weatherText, city, country };
 }
 
-const inputForm = document.querySelector(".input form");
-const input = inputForm.querySelector("#city");
-
-/*const inputSubmit = document.querySelector(".input form [type='submit']");
-inputSubmit.addEventListener("click", (event) => {
-  event.preventDefault();
-
-  const city = inputForm.querySelector("#city");
-  getWeather(city.value).then((data) => {
-    if(data){
-      console.log(extractData(data));
-    }
-    
-  });
-});*/
-
 function formSubmit() {
-  if(input.value != ""){//Če je krajše kot 3 črke je error
+  if (input.value != "") {
+    //Če je krajše kot 3 črke je error
     getWeather(input.value).then((data) => {
-      if(data){
-        console.log(extractData(data));
+      if (data) {
+        const weatherData = extractData(data);
+        dataElem.textContent = `${weatherData.weatherText} with ${weatherData.temp}°C in ${weatherData.city}, ${weatherData.country}`;
       }
     });
   }
 }
-
 
 input.addEventListener("blur", formSubmit);
 
